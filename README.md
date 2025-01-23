@@ -13,4 +13,4 @@
   <br>
 
 # GitHub 📝
-- [입문 문제](https://github.com/s0ooo0k/Algorithm_Study/start)
+- [입문 문제](https://github.com/s0ooo0k/Algorithm_Study/start/)
