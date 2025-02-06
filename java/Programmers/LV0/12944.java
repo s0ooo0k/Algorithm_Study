@@ -1,3 +1,5 @@
+// 12944 평균 뒤집기
+
 class Solution {
     public double solution(int[] arr) {
         double answer = 0;
