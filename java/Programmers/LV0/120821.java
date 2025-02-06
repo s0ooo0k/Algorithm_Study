@@ -1,3 +1,5 @@
+// 120821 배열 뒤집기기
+
 class Solution {
     public int[] solution(int[] num_list) {
         int length = num_list.length;
