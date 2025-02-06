@@ -1,3 +1,5 @@
+// 181936 공배수
+
 class Solution {
     public int solution(int number, int n, int m) {
         int answer = 0;
