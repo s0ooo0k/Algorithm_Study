@@ -1,22 +1,21 @@
 class Solution {
     public String solution(String my_string, int[][] queries) {
-        String answer = my_string;
+        char[] arr = my_string.toCharArray();
         
-        for(int i=0; i<queries.length; i++){
-            StringBuilder sb = new StringBuilder();
-            for(int j=0; j<queries[i][0]; j++){
-                sb.append(answer.charAt(j));
-            }
+        for(int[] q : queries) {
+            int start = q[0];
+            int end = q[1];
             
-            for(int j=queries[i][1]; j>=queries[i][0]; j--){
-                sb.append(answer.charAt(j));
+            while(start<end) {
+                char tmp = arr[start];
+                arr[start] = arr[end];
+                arr[end] = tmp;
+                
+                start++;
+                end--;
             }
-            
-            for(int j=queries[i][1]+1; j<my_string.length(); j++){
-                sb.append(answer.charAt(j));
-            }
-            answer = sb.toString();
         }
-        return answer;
+        
+        return new String(arr);
     }
 }
