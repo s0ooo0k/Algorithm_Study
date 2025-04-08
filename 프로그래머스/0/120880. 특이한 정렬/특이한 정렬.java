@@ -9,9 +9,13 @@ class Solution {
             list.add(nl);
         }
         
-        list.sort((i, j) -> {
-                 if(Math.abs(n-i)==Math.abs(n-j)) return j-i;
-                 return Math.abs(n-i)-Math.abs(n-j);
+        // Compare
+        Collections.sort(list, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer i, Integer j){
+                if(Math.abs(n-i)==Math.abs(n-j)) return j-i;
+                else return Math.abs(n-i)-Math.abs(n-j);
+            }
         });
         
         for(int i=0; i<list.size(); i++){
