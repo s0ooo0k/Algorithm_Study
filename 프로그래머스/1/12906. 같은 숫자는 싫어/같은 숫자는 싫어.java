@@ -1,6 +1,7 @@
 import java.util.*;
 
-public class Solution {
+// =============== 풀이 1
+/* public class Solution {
     public int[] solution(int []arr) {
         Stack<Integer> num = new Stack<>();
         
@@ -25,6 +26,26 @@ public class Solution {
             answer[i]=num.get(i);
         }
 
+        return answer;
+    }
+} */
+
+public class Solution {
+    public int[] solution(int []arr){
+        Deque<Integer> num = new ArrayDeque<>();
+        
+        for(int a: arr){
+            if(num.isEmpty() || num.peekLast() != a) {
+                num.addLast(a);
+            }
+        }
+        
+        int[] answer = new int[num.size()];
+        int i=0;
+        for(int n : num){
+            answer[i]=n;
+            i++;
+        }
         return answer;
     }
 }
