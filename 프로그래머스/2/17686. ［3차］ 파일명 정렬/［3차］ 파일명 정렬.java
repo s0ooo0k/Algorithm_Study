@@ -45,8 +45,7 @@ class Solution {
             i++;
         }
         
-        String tail = file.substring(i); // tail은 사실 안 써도 됨
-        return new FileInfo(head.toString(), Integer.parseInt(number.toString()), tail, file);
+        return new FileInfo(head.toString(), Integer.parseInt(number.toString()), file);
     }
 }
 
@@ -54,13 +53,11 @@ class Solution {
 class FileInfo {
     String head;
     int number;
-    String tail;
     String original;
     
-    public FileInfo(String head, int number, String tail, String original) {
+    public FileInfo(String head, int number, String original) {
         this.head = head;
         this.number = number;
-        this.tail = tail;
         this.original = original;
     }
 }
