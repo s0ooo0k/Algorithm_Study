@@ -12,16 +12,9 @@ class Main {
         if (n==1) {
             System.out.println("SciComLove");
         }
-
         if(n==2) {
             System.out.println("SciComLove");
             System.out.println("SciComLove");
         }
-
-        else {
-            System.out.println("SciComLove");
-        }
-        
     }
 }
-
