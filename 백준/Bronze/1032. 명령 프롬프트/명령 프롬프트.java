@@ -1,36 +1,36 @@
-import java.util.Scanner;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        String[] files = new String[n];
-        
-        for (int i = 0; i < n; i++) {
-            files[i] = sc.next();
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        if(n==1) {
+            System.out.println(br.readLine());
+            return;
         }
 
-        StringBuilder result = new StringBuilder();
-        int len = files[0].length();
+        String[] file = new String[n];
+        
+        for(int i=0; i<n; i++) {
+            file[i] = br.readLine();
+        }
 
-        for (int i = 0; i < len; i++) {
-            char ch = files[0].charAt(i); 
-            boolean same = true;
-            for (int j = 1; j < n; j++) {
-                if (files[j].charAt(i) != ch) {
-                    same = false;
-                    break;
+        System.out.println(pattern(file));
+    }
+
+    public static String pattern(String[] file) {
+        char[] pat = file[0].toCharArray();
+        int len = pat.length;
+
+        for(int i=1; i<file.length; i++) {
+            for(int j=0; j<len; j++) {
+                if(pat[j]!='?' && pat[j]!=file[i].charAt(j)){
+                    pat[j]='?';
                 }
             }
-            if (same) {
-                result.append(ch);
-            } else {
-                result.append('?');
-            }
         }
-        
-        System.out.println(result.toString());
-        sc.close();
+        return String.valueOf(pat);
     }
 }
