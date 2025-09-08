@@ -1,31 +1,32 @@
-import java.util.Scanner;
-import java.util.Arrays;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        int n=sc.nextInt();
-        int m= sc.nextInt();
+        int n = Integer.parseInt(st.nextToken());
+        int m = Integer.parseInt(st.nextToken());
 
-        isPrime(n, m);
-        sc.close();
+        prime(n, m);
     }
+    
+    public static void prime(int n, int m){
+        boolean arr[] = new boolean[m+1];
 
-    public static void isPrime(int n, int m) {
-        boolean[] arr = new boolean[m+1];
-        Arrays.fill(arr, true);
-        arr[0]=arr[1]=false;
+        arr[0]=arr[1]=true;
 
-        for(int i=2; i<=Math.sqrt(m); i++) {
-            if(arr[i]) {
-                for(int j=i*i; j<=m; j+=i) {
-                    arr[j]=false;
-                }
+        for(int i=2; i*i<=m; i++){
+            if(!arr[i]) {
+                for(int j=i*i; j<=m; j+=i) 
+                   arr[j]=true; 
             }
         }
+
         for(int i=n; i<=m; i++) {
-            if(arr[i])
+            if(!arr[i])
                 System.out.println(i);
         }
     }
