@@ -1,55 +1,57 @@
 import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
-    static int[][] maze;
-    static boolean[][] visited;
-    static int N, M;
+class Main {
+    public static int[][] maze;
+    public static int N, M;
+    public static boolean[][] visited;
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        M = sc.nextInt();
-        sc.nextLine();
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
         maze = new int[N][M];
         visited = new boolean[N][M];
 
         for(int i=0; i<N; i++) {
-            String line = sc.nextLine();
+            String s = br.readLine();
             for(int j=0; j<M; j++) {
-                maze[i][j] = line.charAt(j) - '0';
+                maze[i][j] = s.charAt(j) - '0';
             }
         }
 
-        Queue<int[]> queue = new LinkedList<>();
-
-        int[] dx={0, 0, -1, 1};
-        int[] dy={1, -1, 0, 0};
+        int dx[] = {-1, 1, 0, 0};
+        int dy[] = {0, 0, -1, 1};
+        
+        Queue<int[]> q = new LinkedList<>();
 
         visited[0][0] = true;
-        queue.offer(new int[]{0, 0});
+        q.offer(new int[]{0, 0});
 
-        while(!queue.isEmpty()) {
-            int[] now = queue.poll();
-            int x = now[0];
-            int y = now[1];
+        while(!q.isEmpty()) {
+            int[] cur = q.poll();
+            int x = cur[0];
+            int y = cur[1];
 
-            for(int i=0; i<4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
+            if(x==N-1 && y==M-1) {
+                System.out.println(maze[x][y]);
+                return;
+            }
 
-                if(nx<0 || ny<0 || nx>=N || ny>=M)
-                    continue;
-                    
-                if(visited[nx][ny] || maze[nx][ny]==0) 
-                    continue;
+            for(int i=0; i<4; i++){
+                int nx = x+dx[i];
+                int ny = y+dy[i];
 
-                queue.offer(new int[]{nx, ny});
-                visited[nx][ny]= true;
-
-                maze[nx][ny] = maze[x][y]+1;
+                if(nx>=0 && nx<N && ny>=0 && ny<M && !visited[nx][ny] && maze[nx][ny]==1) {
+                    visited[nx][ny] = true;
+                    maze[nx][ny]=maze[x][y]+1;
+                    q.offer(new int[]{nx, ny});
+                }
             }
         }
-        System.out.println(maze[N-1][M-1]);
     }
 }
