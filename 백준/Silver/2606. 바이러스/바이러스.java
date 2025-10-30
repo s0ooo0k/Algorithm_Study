@@ -1,40 +1,46 @@
 import java.util.*;
+import java.lang.*;
+import java.io.*;
 
-public class Main {
+class Main {
+    static int N, V;
+    static ArrayList<ArrayList<Integer>> g = new ArrayList<>();
     static boolean[] visited;
-    static List<List<Integer>> graph = new ArrayList<>();
-    static int count = 0;
+    static int cnt=0;
+    
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int computer = sc.nextInt();
-        int pair = sc.nextInt();
+        N = Integer.parseInt(br.readLine());
+        V = Integer.parseInt(br.readLine());
 
-        for (int i = 0; i <= computer; i++) {
-            graph.add(new ArrayList<>());
+        visited = new boolean[N+1];
+
+        // 그래프 만들기
+        for (int i=0; i<=N; i++) {
+            g.add(new ArrayList<>());
+        }
+        
+        for(int i=0; i<V; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+
+            g.get(u).add(v);
+            g.get(v).add(u);
         }
 
-        for (int i = 0; i < pair; i++) {
-            int a = sc.nextInt();
-            int b = sc.nextInt();
-            graph.get(a).add(b);
-            graph.get(b).add(a);  
-        }
-
-        // 방문
-        visited = new boolean[computer + 1];
-        dfs(1);  
-
-        System.out.println(count - 1);  
+        dfs(1);
+        System.out.println(cnt-1);
     }
 
     public static void dfs(int node) {
         visited[node] = true;
-        count++;
+        cnt++;
 
-        for (int neighbor : graph.get(node)) {
-            if (!visited[neighbor]) {
-                dfs(neighbor);
+        for(int n : g.get(node)) {
+            if(!visited[n]) {
+                dfs(n);
             }
         }
     }
